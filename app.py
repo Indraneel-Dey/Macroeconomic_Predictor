@@ -3,14 +3,13 @@ import pickle
 import numpy as np
 from sklearn.linear_model import RidgeCV
 
-sensex = pickle.load(open('sensex.pkl', 'rb'))
 gdp = pickle.load(open('gdp.pkl', 'rb'))
 
 st.write('Indraneel Dey')
 st.write('Indian Institute of Technology, Madras')
 st.title('Macroeconomics Predictor')
 st.text('Input the values of macroeconomic statistics of India below and get the prediction')
-st.text('of SENSEX and GDP of that year')
+st.text('of GDP of that year')
 st.write("Enter the Population in billions. For example if you want to input 1 billion, enter '1'")
 pop = float(st.text_input('Population', '1.38'))
 st.write("Enter the Unemployment rate in percentage. For example if you want to input 3%, enter '3'")
@@ -35,20 +34,12 @@ st.write("Enter the Public Debt in percentage of GDP. For example if you want to
 debt = float(st.text_input('Public Debt', '73.95'))
 st.write("Enter the Tax in percentage of GDP. For example if you want to input 10%, enter '10'")
 tax = float(st.text_input('Tax', '10.9'))
-st.write("The SENSEX and GDP in billion USD are predicted below")
-st.write("SENSEX close in 2020: 47751.33")
+st.write("The GDP in billion USD is predicted below")
 st.write("GDP of 2020: 2667.69 billion USD")
 
 x = np.array([[pop, ur, pci, er, tb, ir, rainfall, inflation, pir, deficit, debt, tax]])
-sensex_predict = sensex.predict(x)
 gdp_predict = gdp.predict(x)
 
 if st.button('Predict'):
-    col = [0, 0]
-    col[0], col[1] = st.columns(2)
-    with col[0]:
-        st.header('SENSEX')
-        st.text(sensex_predict[0])
-    with col[1]:
-        st.header('GDP')
-        st.text(gdp_predict[0])
+    st.header('GDP')
+    st.text(gdp_predict[0])
